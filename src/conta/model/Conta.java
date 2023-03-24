@@ -1,7 +1,5 @@
 package conta.model;
 
-import conta.util.Cores;
-
 public class Conta {
 	
 	private int numero;

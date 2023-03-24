@@ -1,7 +1,7 @@
 package conta;
 
 import java.util.Scanner;
-
+import conta.model.Conta;
 import conta.util.Cores;
 
 public class Menu {
@@ -10,6 +10,10 @@ public class Menu {
 
 		Scanner scanner = new Scanner(System.in);
 
+		Conta p1 = new Conta (12,0440,1,"Maria Amanda",4000);
+		
+		p1.visualizar();
+		
 		int opcao, numero, agencia, tipo, aniversario, numeroDestino;
 		String titular;
 		float saldo, limite, valor;
