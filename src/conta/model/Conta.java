@@ -15,6 +15,8 @@ public class Conta {
 		this.titular = titular;
 		this.saldo = saldo;
 	}
+	
+	public Conta() {}
 
 	public int getNumero() {
 		return numero;
@@ -69,10 +71,10 @@ public class Conta {
 		System.out.println("                    DADOS DA CONTA                        ");
 		System.out.println("**********************************************************");
 		System.out.println("Número da conta: " + this.numero);
-		System.out.println("Número da conta: " + this.agencia);
-		System.out.println("Número da conta: " + tipo);
-		System.out.println("Número da conta: " + this.titular);
-		System.out.println("Número da conta: " + this.saldo);
+		System.out.println("Número da agência: " + this.agencia);
+		System.out.println("Tipo da conta: " + tipo);
+		System.out.println("Titular da conta: " + this.titular);
+		System.out.println("Saldo da conta: " + this.saldo);
 
 	}
 	

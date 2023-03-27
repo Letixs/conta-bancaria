@@ -2,6 +2,8 @@ package conta;
 
 import java.util.Scanner;
 import conta.model.Conta;
+import conta.model.ContaCorrente;
+import conta.model.ContaPoupanca;
 import conta.util.Cores;
 
 public class Menu {
@@ -13,6 +15,18 @@ public class Menu {
 		Conta p1 = new Conta (12,0440,1,"Maria Amanda",4000);
 		
 		p1.visualizar();
+		
+		ContaCorrente p2 = new ContaCorrente(567,0163,1,"Yago Neves",6580,4350);
+		
+		p2.visualizar();
+		
+		Conta p3 = new Conta();
+		
+		p3.visualizar();
+		
+		ContaPoupanca p4 = new ContaPoupanca(36,0716,2,"Fernanda Dias",3800,900);
+		
+		p4.visualizar();
 		
 		int opcao, numero, agencia, tipo, aniversario, numeroDestino;
 		String titular;
@@ -151,7 +165,7 @@ public class Menu {
 				System.out.println("Digite o número da conta: ");
 				numero = scanner.nextInt();
 				
-				System.out.println("Digite o valor do Depósito: ");
+				System.out.println("Digite o valor do Depósito:  ");
 				valor = scanner.nextFloat();
 			}
 			case 8 -> {
