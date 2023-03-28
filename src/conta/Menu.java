@@ -12,21 +12,13 @@ public class Menu {
 
 		Scanner scanner = new Scanner(System.in);
 
-		Conta p1 = new Conta (12,0440,1,"Maria Amanda",4000);
+		ContaCorrente p1 = new ContaCorrente(567,0163,1,"Yago Neves",6580,4350);
 		
 		p1.visualizar();
 		
-		ContaCorrente p2 = new ContaCorrente(567,0163,1,"Yago Neves",6580,4350);
+		ContaPoupanca p2 = new ContaPoupanca(36,0716,2,"Fernanda Dias",3800,12,900);
 		
 		p2.visualizar();
-		
-		Conta p3 = new Conta();
-		
-		p3.visualizar();
-		
-		ContaPoupanca p4 = new ContaPoupanca(36,0716,2,"Fernanda Dias",3800,900);
-		
-		p4.visualizar();
 		
 		int opcao, numero, agencia, tipo, aniversario, numeroDestino;
 		String titular;
