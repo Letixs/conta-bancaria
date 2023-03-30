@@ -1,7 +1,10 @@
 package conta;
 
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
-import conta.model.Conta;
+
+import conta.controller.ContaController;
 import conta.model.ContaCorrente;
 import conta.model.ContaPoupanca;
 import conta.util.Cores;
@@ -12,26 +15,22 @@ public class Menu {
 
 		Scanner scanner = new Scanner(System.in);
 
-		ContaCorrente p1 = new ContaCorrente(567,0163,1,"Yago Neves",6580,4350);
-		
-		p1.visualizar();
-		
-		ContaPoupanca p2 = new ContaPoupanca(36,0716,2,"Fernanda Dias",3800,12,900);
-		
-		p2.visualizar();
-		
+		ContaController contas = new ContaController();
+
 		int opcao, numero, agencia, tipo, aniversario, numeroDestino;
 		String titular;
 		float saldo, limite, valor;
 
 		while (true) {
 
-			System.out.println(Cores.TEXT_GREEN_BOLD_BRIGHT + Cores.ANSI_BLACK_BACKGROUND + "**********************************************************");
+			System.out.println(Cores.TEXT_GREEN_BOLD_BRIGHT + Cores.ANSI_BLACK_BACKGROUND
+					+ "**********************************************************");
 			System.out.println("                                                          ");
 			System.out.println("                     BANCO                                ");
 			System.out.println("                                                          ");
 			System.out.println("**********************************************************" + Cores.TEXT_RESET);
-			System.out.println(Cores.TEXT_YELLOW_BOLD + Cores.ANSI_BLACK_BACKGROUND + "                                                          ");
+			System.out.println(Cores.TEXT_YELLOW_BOLD + Cores.ANSI_BLACK_BACKGROUND
+					+ "                                                          ");
 			System.out.println("             1 - Criar Conta                              ");
 			System.out.println("             2 - Listar todas as Contas                   ");
 			System.out.println("             3 - Buscar Conta por numero                  ");
@@ -45,7 +44,13 @@ public class Menu {
 			System.out.println("**********************************************************" + Cores.TEXT_RESET);
 			System.out.println("Entre com a opção desejada: \n");
 
-			opcao = scanner.nextInt();
+			try {
+				opcao = scanner.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("Digite valores inteiros!");
+				scanner.nextLine();
+				opcao = 0;
+			}
 
 			if (opcao == 9) {
 				System.out.println("\nAgredecemos a preferência!");
@@ -77,22 +82,28 @@ public class Menu {
 					System.out.println("Digite o Limite de Crédito (R$): ");
 					limite = scanner.nextFloat();
 
-					// criar o objeto conta corrente
+					contas.cadastrar(new ContaCorrente(contas.gerarNumero(), agencia, tipo, titular, saldo, limite));
 				}
 				case 2 -> {
 					System.out.println("Digite o dia do Aniversario da Conta: ");
 					aniversario = scanner.nextInt();
 
-					// criar o objeto conta poupanca
+					contas.cadastrar(new ContaPoupanca(contas.gerarNumero(), agencia, tipo, titular, saldo, aniversario));
 				}
 				}
+				keyPress();
 			}
-			case 2 -> System.out.println("\nListar todas as Contas\n\n");
+			case 2 -> {
+				System.out.println("\nListar todas as Contas\n\n");
+				contas.listarContas();
+				keyPress();
+			}
 			case 3 -> {
 				System.out.println("\nConsultar dados da Conta - por número\n\n");
 
 				System.out.println("Digite o número da conta: ");
 				numero = scanner.nextInt();
+				keyPress();
 			}
 			case 4 -> {
 				System.out.println("\nAtualizar dados da Conta\n\n");
@@ -135,30 +146,34 @@ public class Menu {
 				}
 
 				// fim do condicional buscar na collection
+				keyPress();
 			}
 			case 5 -> {
 				System.out.println("\nApagar a Conta\n\n");
 
 				System.out.println("Digite o número da conta: ");
 				numero = scanner.nextInt();
+				keyPress();
 			}
 			case 6 -> {
 				System.out.println("\nSaque\n\n");
 
 				System.out.println("Digite o número da conta: ");
 				numero = scanner.nextInt();
-				
+
 				System.out.println("Digite o valor do Saque: ");
 				valor = scanner.nextFloat();
+				keyPress();
 			}
 			case 7 -> {
 				System.out.println("\nDepósito\n\n");
 
 				System.out.println("Digite o número da conta: ");
 				numero = scanner.nextInt();
-				
+
 				System.out.println("Digite o valor do Depósito:  ");
 				valor = scanner.nextFloat();
+				keyPress();
 			}
 			case 8 -> {
 				System.out.println("\nTransferência entre Contas\n\n");
@@ -166,7 +181,7 @@ public class Menu {
 				// fim do condicional buscar na collection
 				System.out.println("Digite o Numero da Conta de Origem: ");
 				numero = scanner.nextInt();
-				
+
 				System.out.println("Digite o Numero da Conta de Destino: ");
 				numeroDestino = scanner.nextInt();
 
@@ -175,6 +190,7 @@ public class Menu {
 					valor = scanner.nextFloat();
 				} while (valor <= 0);
 
+				keyPress();
 			}
 			default -> System.out.println("\nOpção Inválida!\n");
 			}
@@ -182,11 +198,23 @@ public class Menu {
 		}
 
 	}
-	
+
 	public static void sobre() {
 		System.out.println("\n*********************************************************");
 		System.out.println("Letícia Queiroga - letqueirogaa@outlook.com");
 		System.out.println("github.com/Letixs");
 		System.out.println("*********************************************************");
 	}
+
+	public static void keyPress() {
+
+		try {
+			System.out.println(Cores.TEXT_RESET + "Pressione a tecla enter  para continuar");
+			System.in.read();
+		} catch (IOException e) {
+			System.out.println("Erro de digitação");
+		}
+
+	}
+
 }
